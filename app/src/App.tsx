@@ -19,8 +19,6 @@ const App: FC = () => {
     if (!store.is_auth) {
       store.refresh();
     }
-
-    store.getAllDocuments();
   }, [store]);
 
   if (store.is_loading) {

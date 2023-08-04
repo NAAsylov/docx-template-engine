@@ -6,6 +6,7 @@ import axios from 'axios';
 import {AuthResponse} from "../models/response/AuthResponse";
 import {API_URL} from "../http";
 import {IDocument, TDocumentType} from "../models/IDocument";
+import {getCookie, removeJWT, setJWT} from "../helpers/cookie-helper";
 
 export default class Store {
   user = {} as IUser;
@@ -38,8 +39,7 @@ export default class Store {
   async login(email: string, password: string) {
     try {
       const response = await AuthService.login(email, password);
-      localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('refresh_token', response.data.refresh_token);
+      setJWT(response.data.access_token, response.data.refresh_token);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
@@ -50,8 +50,7 @@ export default class Store {
   async registration(email: string, password: string) {
     try {
       const response = await AuthService.registration(email, password);
-      localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('refresh_token', response.data.refresh_token);
+      setJWT(response.data.access_token, response.data.refresh_token);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
@@ -62,8 +61,7 @@ export default class Store {
   async logout() {
     try {
       await AuthService.logout(this.user.id);
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      removeJWT();
       this.setAuth(false);
       this.setUser({} as IUser);
     } catch (e) {
@@ -74,7 +72,7 @@ export default class Store {
   async refresh() {
     try {
       this.setIsLoading(true);
-      const refresh_token = localStorage.getItem('refresh_token');
+      const refresh_token = getCookie('refresh_token');
 
       if (!refresh_token) {
         console.error('Не авторизован!');
@@ -85,8 +83,7 @@ export default class Store {
         `${API_URL}/refresh`,
         { refresh_token },
         { withCredentials: true });
-      localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('refresh_token', response.data.refresh_token);
+      setJWT(response.data.access_token, response.data.refresh_token);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
