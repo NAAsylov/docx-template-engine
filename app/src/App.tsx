@@ -17,9 +17,11 @@ const App: FC = () => {
 
   useEffect(() => {
     if (!store.is_auth) {
-      store.refresh();
+      store.refresh().then(() => store.getAllDocuments());
+    } else {
+      store.getAllDocuments();
     }
-  }, [store]);
+  }, []);
 
   if (store.is_loading) {
     return (<Spinner/>);

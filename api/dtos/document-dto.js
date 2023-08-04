@@ -3,11 +3,13 @@ module.exports = class DocumentDto {
   name;
   type;
   file;
+  pdf;
 
   constructor(model) {
     this.id = model.id;
     this.name = model.name;
     this.type = model.type;
     this.file = model.file;
+    this.pdf = model.pdf;
   }
 }

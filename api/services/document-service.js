@@ -15,10 +15,12 @@ class DocumentService {
   async newDocument(name, type, file) {
     const buffer = Buffer.from(file, 'base64');
 
+    /** TODO: вместо buffer, в pdf нужно сохранять pdf файл. */
     const document = await DocumentModel.create({
       name: name || 'Document',
       type: type || 'public',
       file: buffer,
+      pdf: buffer,
     });
 
     return new DocumentDto(document);

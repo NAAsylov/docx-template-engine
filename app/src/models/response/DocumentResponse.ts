@@ -7,5 +7,9 @@ export interface IUploadDocument {
   file: {
     type: string;
     data: Uint8Array;
+  };
+  pdf: {
+    type: string;
+    data: Uint8Array;
   }
 }

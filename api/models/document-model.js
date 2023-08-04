@@ -20,7 +20,11 @@ const DocumentModel = db.define('documents',
     file: {
       type: DataTypes.BLOB,
       allowNull: false,
-    }
+    },
+    pdf: {
+      type: DataTypes.BLOB,
+      allowNull: false,
+    },
   },
 )
 

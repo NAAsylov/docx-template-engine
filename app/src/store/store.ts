@@ -11,6 +11,7 @@ import {getCookie, removeJWT, setJWT} from "../helpers/cookie-helper";
 export default class Store {
   user = {} as IUser;
   documents = [] as IDocument[];
+  current_document: IDocument | undefined = undefined;
   is_auth = false;
   is_loading = false;
 
@@ -30,6 +31,10 @@ export default class Store {
 
   setDocuments(documents: IDocument[]) {
     this.documents = documents;
+  }
+
+  setCurrentDocument(id: string) {
+    this.current_document = this.documents.find((document) => document.id === id);
   }
 
   setIsLoading(is_loading: boolean) {
@@ -104,7 +109,11 @@ export default class Store {
 
   async uploadFile(name: string, type: TDocumentType, file: string | ArrayBuffer) {
     try {
-      return await DocumentService.uploadFile(name, type, file);
+      const response = await DocumentService.uploadFile(name, type, file);
+
+      this.setDocuments([...this.documents, response.data]);
+
+      return response;
     } catch (e) {
       alert((e as any).response?.data?.message);
     }
