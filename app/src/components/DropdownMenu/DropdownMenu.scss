@@ -1,0 +1,62 @@
+@import '../../styles/colors';
+@import '../../styles/fonts';
+
+.drop-menu {
+  position: relative;
+  width: 100%;
+
+  &--open {
+    border-radius: 16px 16px 0 0;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 45px;
+    width: 100%;
+    color: $black;
+    background: $white;
+    font-size: 20px;
+    font-family: "Rosatom";
+    text-align: left;
+    border-radius: 16px;
+
+    &--primary {
+      height: 72px;
+      color: $main_color_1;
+      font-family: "RosatomBold";
+      border: 1px solid $black--20;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 32px;
+        background-image: url("../../assets/icons/down-arrow.svg");
+      }
+    }
+
+    &--open {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    padding: 20px 0;
+    width: 100%;
+    background: $white;
+    border: solid $black--20;
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 16px 16px;
+  }
+  &__item {}
+}

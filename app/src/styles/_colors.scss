@@ -1,0 +1,18 @@
+$main_color_1: #003274;
+$main_color_2: #025EA1;
+$main_color_3: #6CACE4;
+$main_color_4: #5F6062;
+$black: #000000;
+$black--20: rgba(0, 0, 0, 0.2);
+$black--25: rgba(0, 0, 0, 0.25);
+$white: #FFFFFF;
+$gray--50: #7F7F7F;
+$gray--90: #333333;
+
+@mixin gradient_default() {
+  background: linear-gradient(90deg, $main_color_3 0%, $main_color_2 100%);
+}
+
+@mixin gradient_secondary() {
+  background: linear-gradient(90deg, $main_color_2 31.05%, $main_color_1 100%);
+}
