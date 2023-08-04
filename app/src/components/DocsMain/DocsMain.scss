@@ -1,8 +1,13 @@
 .docs {
   display: flex;
 
-
   &__editor {}
 
-  &__viewer {}
+  &__viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 60%;
+    height: calc(100vh - 110px);
+  }
 }

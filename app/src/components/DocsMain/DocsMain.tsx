@@ -15,7 +15,7 @@ const DocsMain: FC<IProps> = ({ documents }) => {
       <div className="docs__editor">
         <DocsEditor/>
       </div>
-      <div className="docs_viewer">
+      <div className="docs__viewer">
         <DocsViewer/>
       </div>
     </div>

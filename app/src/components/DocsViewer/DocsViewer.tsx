@@ -8,7 +8,7 @@ interface IProps {}
 const DocsViewer: FC<IProps> = (props) => {
   return (
     <div>
-      Docs Viewer
+      ТУТ БУДЕТ ПРЕВЬЮ ДОКУМЕНТА
     </div>
   )
 }
