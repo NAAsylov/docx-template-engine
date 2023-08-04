@@ -21,8 +21,13 @@ class DocumentController {
   }
 
   async downloadDocument(req, res, next) {
-    const { id } = req.body;
-    documentService.downloadDocument(id)
+    try {
+      const { id, fio, count_day } = req.body;
+      const document = await documentService.downloadDocument(id, fio, count_day);
+      return res.json(document);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

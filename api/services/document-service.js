@@ -23,7 +23,7 @@ class DocumentService {
     return new DocumentDto(document);
   }
 
-  async downloadDocument(id) {
+  async downloadDocument(id, fio, count_day) {
     const target_document = await DocumentModel.findOne({ where: { id }});
 
     if (!target_document) {
@@ -32,18 +32,15 @@ class DocumentService {
 
     const documentDto = new DocumentDto(target_document);
 
-    const document_uint_array = await docx.patchDocument(documentDto.data, {
+    const document_uint_array = await docx.patchDocument(documentDto.file, {
       patches: {
         fio: {
           type: PatchType.PARAGRAPH,
-          children: [new TextRun("Sir. "), new TextRun("John Doe"), new TextRun("(The Conqueror)")],
+          children: [new TextRun(fio)],
         },
-        date: {
-          type: PatchType.DOCUMENT,
-          children: [
-            new Paragraph("Lorem ipsum paragraph"),
-            new Paragraph("Another paragraph"),
-          ],
+        count_day: {
+          type: PatchType.PARAGRAPH,
+          children: [new TextRun(count_day)],
         }
       }
     });
