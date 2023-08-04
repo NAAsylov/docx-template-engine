@@ -10,8 +10,6 @@ interface IProps {
 }
 
 const DocsMain: FC<IProps> = ({ documents }) => {
-
-
   return (
     <div className="docs">
       <div className="docs__editor">

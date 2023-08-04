@@ -11,4 +11,8 @@ export default class DocumentService {
   static async uploadFile(name: string, type: TDocumentType, file: string | ArrayBuffer): Promise<AxiosResponse<IUploadDocument>>  {
     return $api.post<IUploadDocument>('/document/new', { name, type, file });
   }
+
+  static async downloadFile(id: string, fio: string, count_day: number) {
+    return $api.post('/document/download', { id, fio, count_day });
+  }
 }

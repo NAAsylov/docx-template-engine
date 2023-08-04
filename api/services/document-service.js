@@ -1,9 +1,6 @@
 const DocumentModel = require('../models/document-model');
 const DocumentDto = require('../dtos/document-dto');
 const ApiError = require('../exceptions/api-error')
-const fs = require('node:fs');
-const path = require('node:path');
-const { Blob } = require('node:buffer');
 const docx = require('docx');
 const { PatchType, Paragraph, TextRun } = require('docx');
 

@@ -118,4 +118,14 @@ export default class Store {
       alert((e as any).response?.data?.message);
     }
   }
+
+  async downloadFile(id: string, fio: string, count_day: number) {
+    try {
+      const response = await DocumentService.downloadFile(id, fio, count_day);
+
+      return response;
+    } catch (e) {
+      alert((e as any).response?.data?.message);
+    }
+  }
 }

@@ -1,3 +1,6 @@
+@import "../../styles/fonts";
+@import "../../styles/colors";
+
 .docs-editor {
   display: flex;
   flex-direction: column;
@@ -5,4 +8,18 @@
   gap: 30px;
   width: 807px;
   padding: 52px;
+
+  &__button {
+    height: 39px;
+    border-radius: 14px;
+    color: $white;
+    font-family: "RosatomBold";
+    font-size: 14px;
+
+    @include gradient_secondary;
+
+    &:hover {
+      box-shadow: 0 0 13px 5px $black--25;
+    }
+  }
 }
