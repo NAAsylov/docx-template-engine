@@ -29,9 +29,9 @@ const start = async () => {
         console.log('Connect database successfully.')
 
         // Enable if need sync db
-        // db.sync()
-        //   .then(() => console.log('All models were synchronized successfully.'))
-        //   .catch((error) => console.error('Unable to synchronize all models:', error));
+        db.sync()
+          .then(() => console.log('All models were synchronized successfully.'))
+          .catch((error) => console.error('Unable to synchronize all models:', error));
       })
       .catch((error) => console.error('Unable to connect to the database:', error));
   } catch (error) {

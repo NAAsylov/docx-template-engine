@@ -3,6 +3,8 @@ const DocumentDto = require('../dtos/document-dto');
 const ApiError = require('../exceptions/api-error')
 const docx = require('docx');
 const { PatchType, Paragraph, TextRun } = require('docx');
+const fs = require('node:fs');
+const path = require('node:path');
 
 class DocumentService {
   async getAll() {
@@ -32,7 +34,9 @@ class DocumentService {
 
     const documentDto = new DocumentDto(target_document);
 
-    const document_uint_array = await docx.patchDocument(documentDto.file, {
+    /** TODO: Нужно разобраться с ошибкой чтения файла из БД. */
+    // const document_uint_array = await docx.patchDocument(documentDto.file, {
+    const document_uint_array = await docx.patchDocument(fs.readFileSync(path.join(__dirname, 'document.docx')), {
       patches: {
         fio: {
           type: PatchType.PARAGRAPH,
@@ -45,7 +49,7 @@ class DocumentService {
       }
     });
 
-    // fs.writeFileSync(path.join(__dirname, 'new-document.docx'), doc);
+    fs.writeFileSync(path.join(__dirname, 'new-document.docx'), document_uint_array);
     return Buffer.from(document_uint_array).toString('base64');
   }
 }
